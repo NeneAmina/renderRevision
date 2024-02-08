@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: cloud-web
+    region: frankfurt
+    plan: free
+    runtime: node
+    repo: https://github.com/NeneAmina/renderRevision.git
+    branch: master
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: esgi.heroku.nodejs
+          property: connectionString
+
+databases:
+  - name: esgi.heroku.nodejs
+    region: frankfurt
+    plan: free
+    databaseName: cloud
+    user: cloud
